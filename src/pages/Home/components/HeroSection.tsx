@@ -1,26 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import { AnimatePresence, motion } from 'framer-motion';
-import { SlideData } from '../../../interfaces/Pages';
+import { slides } from '../../../Data/homeData';
 
 
 
-const slides: SlideData[] = [
-  {
-    image: 'https://saloonsite.s3.eu-north-1.amazonaws.com/WhatsApp+Image+2025-02-21+at+12.55.01_9d6686e8.jpg',
-    title: 'Experience Luxury',
-    description: 'Step into a world of elegance and style.'
-  },
-  {
-    image: 'https://saloonsite.s3.eu-north-1.amazonaws.com/WhatsApp+Image+2025-02-21+at+12.55.12_3c3c2704.jpg',
-    title: 'Top-Tier Services',
-    description: 'From haircuts to spa treatments, we’ve got you covered.'
-  },
-  {
-    image: 'https://saloonsite.s3.eu-north-1.amazonaws.com/WhatsApp+Image+2025-02-21+at+12.55.25_0bbe0efb.jpg',
-    title: 'Redefine Your Style',
-    description: 'Our stylists are ready to transform your look.'
-  }
-];
+
+
 
 const HeroSection: React.FC = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
