@@ -1,37 +1,22 @@
 import React from 'react';
 import { motion } from 'framer-motion';
+import { testimonials } from '../../../Data/homeData';
 
-const testimonials = [
-  {
-    quote: 'The best salon experience I have ever had. My hair has never looked better!',
-    author: 'Jane Doe',
-    image: 'https://saloonsite.s3.eu-north-1.amazonaws.com/WhatsApp+Image+2025-02-28+at+10.46.00_df07b328.jpg'
-  },
-  {
-    quote: 'Absolutely amazing! The staff is friendly and the service is top-notch.',
-    author: 'John Smith',
-    image: 'https://saloonsite.s3.eu-north-1.amazonaws.com/WhatsApp+Image+2025-02-28+at+10.45.51_ef733992.jpg'
-  },
-  {
-    quote: 'I love the ambiance and the professionalism. Highly recommended!',
-    author: 'Emily Johnson',
-    image: 'https://saloonsite.s3.eu-north-1.amazonaws.com/WhatsApp+Image+2025-02-28+at+10.51.38_6dfea8e8.jpg',
-  }
-];
 
-// Parent container variants
+
+
 const containerVariants = {
   hidden: { opacity: 0 },
   show: {
     opacity: 1,
     transition: {
-      // Stagger children so each card animates sequentially
+      
       staggerChildren: 0.2,
     },
   },
 };
 
-// Each card item variants
+
 const cardVariants = {
   hidden: { opacity: 0, y: 30 },
   show: {
@@ -50,7 +35,7 @@ const TestimonialSection: React.FC = () => {
       <div className="container mx-auto px-4">
         <h2 className="text-3xl font-bold text-center mb-8">What Our Clients Say</h2>
 
-        {/* Motion container for staggered fade-in */}
+       
         <motion.div
           className="grid grid-cols-1 md:grid-cols-3 gap-8"
           variants={containerVariants}
