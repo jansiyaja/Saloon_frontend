@@ -1,23 +1,18 @@
-import { Routes, Route } from "react-router-dom";
-import FRONTEND_ROUTES from "./Routes/frontendRoutes";
-import Home from "./pages/Home";
+import { Outlet } from "react-router-dom"
+import Header from "./components/common/Header"
+import Footer from "./components/common/Footer"
 
-import Layout from "./Layout";
 
-const App = () => {
+const Layout = () => {
   return (
-    <Routes>
-     
-      <Route path="/" element={<Layout />}>
-        <Route index element={<Home />} />
+    <div className="min-h-screen flex flex-col">
+      <Header/>
+      <main className="flex-grow">
+        <Outlet/>
+          </main>
+        <Footer/>
+    </div>
+  )
+}
 
-      </Route>
-
-      {/* Routes WITHOUT Layout (Login & Register) */}
-      <Route path={FRONTEND_ROUTES.LOGIN} element={<Login />} />
-      <Route path={FRONTEND_ROUTES.REGISTER} element={<Register />} />
-    </Routes>
-  );
-};
-
-export default App;
+export default Layout
