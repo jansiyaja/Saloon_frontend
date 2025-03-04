@@ -16,7 +16,7 @@ const AboutSection = () => {
 
       
         <div className="md:w-1/2 md:pl-12 mt-8 md:mt-0">
-          <h2 className="text-3xl font-bold mb-4">Our Story</h2>
+          <h2 className="text-4xl font-semibold text-center mb-8">Our Story</h2>
           <p className="mb-4">
             Established over a century ago, our salon began as a humble,
             family-run barbershop in the early 1900s. From day one, we’ve been

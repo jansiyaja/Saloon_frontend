@@ -1,32 +1,31 @@
 import React from 'react';
 import { motion } from 'framer-motion';
+import { SlideData } from '../../../interfaces/Pages';
+import { Link } from 'react-router-dom';
+import FRONTEND_ROUTES from '../../../Routes/frontendRoutes';
 
-interface Service {
-  title: string;
-  description: string;
-  icon?: string;
-}
 
-const services: Service[] = [
+
+const services: SlideData[] = [
   {
     title: 'Hair Styling',
     description: 'Trendy cuts, blowouts, and updos for any occasion.',
-    icon: 'https://saloonsite.s3.eu-north-1.amazonaws.com/WhatsApp+Image+2025-02-21+at+14.00.22_f6ad545b.jpg',
+    image: 'https://saloonsite.s3.eu-north-1.amazonaws.com/WhatsApp+Image+2025-02-21+at+14.00.22_f6ad545b.jpg',
   },
   {
     title: 'Hair Coloring',
     description: 'Vibrant colors and professional highlights for a fresh look.',
-     icon: 'https://saloonsite.s3.eu-north-1.amazonaws.com/WhatsApp+Image+2025-02-22+at+10.29.49_8754802f.jpg',
+     image: 'https://saloonsite.s3.eu-north-1.amazonaws.com/WhatsApp+Image+2025-02-22+at+10.29.49_8754802f.jpg',
       },
   {
     title: 'Spa Treatments',
     description: 'Rejuvenate with relaxing facials, massages, and more.',
-    icon: 'https://saloonsite.s3.eu-north-1.amazonaws.com/wellness-concept-with-woman-massage-salon.jpg',
+    image: 'https://saloonsite.s3.eu-north-1.amazonaws.com/wellness-concept-with-woman-massage-salon.jpg',
   },
   {
     title: 'Manicure & Pedicure',
     description: 'Pamper yourself with our nail care and polish services.',
-    icon: 'https://saloonsite.s3.eu-north-1.amazonaws.com/nail-hygiene-care-nail-polish.jpg',
+    image: 'https://saloonsite.s3.eu-north-1.amazonaws.com/nail-hygiene-care-nail-polish.jpg',
   },
 ];
 
@@ -56,11 +55,11 @@ const ServicesSection: React.FC = () => {
   return (
     <section className="bg-black text-amber-300 py-16">
       <div className="container mx-auto px-4">
-        <h2 className="text-xl md:text-2xl font-bold text-center mb-8">
+        <h2 className="text-4xl font-semibold text-center mb-8">
           Our Services
         </h2>
 
-        {/* Service Cards Container */}
+       
         <motion.div
           className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8"
           variants={containerVariants}
@@ -79,6 +78,7 @@ const ServicesSection: React.FC = () => {
               whileHover={{ scale: 1.05 }} 
               whileTap={{ scale: 0.95 }}   
             >
+              <Link to={FRONTEND_ROUTES.SERVICES}>
               <div
                 className="
                   w-full h-full  text-white
@@ -87,16 +87,17 @@ const ServicesSection: React.FC = () => {
                   shadow-xl bg-cover
                 "
                  style={{
-              backgroundImage: `url(${service.icon})`,
+              backgroundImage: `url(${service.image})`,
             }}
               >
    
-
                 <h3 className="text-xl font-bold mb-2">{service.title}</h3>
                 <p className="text-sm md:text-base text-center">
                   {service.description}
                 </p>
-              </div>
+                </div>
+                
+              </Link>
             </motion.div>
           ))}
         </motion.div>

@@ -1,11 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { AnimatePresence, motion } from 'framer-motion';
+import { SlideData } from '../../../interfaces/Pages';
 
-interface SlideData {
-  image: string;
-  title: string;
-  description: string;
-}
+
 
 const slides: SlideData[] = [
   {
