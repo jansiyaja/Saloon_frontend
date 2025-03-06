@@ -6,9 +6,9 @@ const AboutSection = () => {
     <section className="bg-black text-amber-300 py-16">
       <div className="container mx-auto px-4 flex flex-col md:flex-row items-center">
         
-        <div className="md:w-1/2">
+        <div className="md:w-1/2 ps-5">
           <img
-            src="https://saloonsite.s3.eu-north-1.amazonaws.com/concentrated-shoemaker-workshop-making-shoes.jpg"
+            src="https://saloonsite.s3.eu-north-1.amazonaws.com/About-hero.jpeg"
             alt="Our Story"
             className="rounded-lg shadow-lg"
           />

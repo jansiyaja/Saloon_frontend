@@ -1,83 +1,65 @@
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import { Menu, X } from "lucide-react";
 import FRONTEND_ROUTES from "../../Routes/frontendRoutes";
+import Logo from "../../assets/Logo.png";
 
 const Header: React.FC = () => {
   const [isOpen, setIsOpen] = useState(false);
+  const location = useLocation(); 
+
+  const navLinks = [
+    { path: FRONTEND_ROUTES.HOME, label: "Home" },
+    { path: FRONTEND_ROUTES.SERVICES, label: "Services" },
+    { path: FRONTEND_ROUTES.ABOUT, label: "About" },
+    { path: FRONTEND_ROUTES.CONTACT, label: "Contact" },
+  ];
 
   return (
-    <header className="bg-black shadow-md sticky top-0 z-50">
+    <header className="fixed top-0 left-0 w-full z-10 bg-transparent transition-all duration-300">
       <div className="container mx-auto px-4 py-3 flex justify-between items-center">
-        
-        <Link to={FRONTEND_ROUTES.HOME} className="text-2xl font-bold text-amber-300">
-          Premium Salon
+        {/* Logo */}
+        <Link to={FRONTEND_ROUTES.HOME} className="flex items-center space-x-2 font-medium text-amber-300">
+          <img src={Logo} alt="Logo" className="h-10 w-auto object-contain" />
         </Link>
 
-        
+        {/* Desktop Navigation */}
         <nav className="hidden md:flex space-x-6">
-          <Link to={FRONTEND_ROUTES.HOME} className="text-amber-300 hover:text-amber-400 font-medium">
-            Home
-          </Link>
-          <Link to={FRONTEND_ROUTES.SERVICES} className="text-amber-300 hover:text-amber-400 font-medium">
-            Services
-          </Link>
-          <Link to={FRONTEND_ROUTES.ABOUT} className="text-amber-300 hover:text-amber-400 font-medium">
-            About
-          </Link>
-          <Link to={FRONTEND_ROUTES.CONTACT} className="text-amber-300 hover:text-amber-400 font-medium">
-            Contact
-          </Link>
+          {navLinks.map((link) => (
+            <Link
+              key={link.path}
+              to={link.path}
+              className={`font-medium transition-colors ${
+                location.pathname === link.path ? "text-white" : "text-amber-300 hover:text-amber-400"
+              }`}
+            >
+              {link.label}
+            </Link>
+          ))}
         </nav>
 
-        <button
-          className="md:hidden text-amber-300"
-          onClick={() => setIsOpen(!isOpen)}
-        >
+        <button className="md:hidden text-amber-300 focus:outline-none" onClick={() => setIsOpen(!isOpen)}>
           {isOpen ? <X size={28} /> : <Menu size={28} />}
         </button>
       </div>
 
-      {/* Mobile Nav */}
+     
       {isOpen && (
         <nav className="md:hidden bg-black border-t border-amber-300">
           <ul className="flex flex-col space-y-4 p-4">
-            <li>
-              <Link
-                to="/"
-                className="block text-amber-300 hover:text-amber-400"
-                onClick={() => setIsOpen(false)}
-              >
-                Home
-              </Link>
-            </li>
-            <li>
-              <Link
-                to="/services"
-                className="block text-amber-300 hover:text-amber-400"
-                onClick={() => setIsOpen(false)}
-              >
-                Services
-              </Link>
-            </li>
-            <li>
-              <Link
-                to="/about"
-                className="block text-amber-300 hover:text-amber-400"
-                onClick={() => setIsOpen(false)}
-              >
-                About
-              </Link>
-            </li>
-            <li>
-              <Link
-                to="/contact"
-                className="block text-amber-300 hover:text-amber-400"
-                onClick={() => setIsOpen(false)}
-              >
-                Contact
-              </Link>
-            </li>
+            {navLinks.map((link) => (
+              <li key={link.path}>
+                <Link
+                  to={link.path}
+                  className={`block transition-colors ${
+                    location.pathname === link.path ? "text-white" : "text-amber-300 hover:text-amber-400"
+                  }`}
+                  onClick={() => setIsOpen(false)}
+                >
+                  {link.label}
+                </Link>
+              </li>
+            ))}
           </ul>
         </nav>
       )}

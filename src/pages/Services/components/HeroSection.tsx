@@ -3,7 +3,7 @@ import { motion, AnimatePresence } from "framer-motion";
 
 const images = [
   "https://saloonsite.s3.eu-north-1.amazonaws.com/WhatsApp+Image+2025-02-28+at+13.15.21_04a61ae9.jpg",
-  "https://saloonsite.s3.eu-north-1.amazonaws.com/man-getting-his-beard-shaved-with-razor+(1).jpg",
+ "https://saloonsite.s3.eu-north-1.amazonaws.com/About-hero.jpeg",
   "https://saloonsite.s3.eu-north-1.amazonaws.com/man-getting-his-beard-shaved-with-razor.jpg",
 ];
 
@@ -13,7 +13,7 @@ const HeroSection: React.FC = () => {
   useEffect(() => {
     const interval = setInterval(() => {
       setIndex((prevIndex) => (prevIndex + 1) % images.length);
-    }, 2000);
+    }, 1000);
 
     return () => clearInterval(interval);
   }, []);

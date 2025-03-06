@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { AnimatePresence, motion } from 'framer-motion';
 import { slides } from '../../../Data/homeData';
+import { useNavigate } from 'react-router-dom';
+import FRONTEND_ROUTES from '../../../Routes/frontendRoutes';
 
 
 
@@ -9,6 +11,7 @@ import { slides } from '../../../Data/homeData';
 
 const HeroSection: React.FC = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
+  const navigate=useNavigate()
 
  
   useEffect(() => {
@@ -66,7 +69,9 @@ const HeroSection: React.FC = () => {
                   transition-transform duration-300
                   shadow-xl
                 "
+                 onClick={() => navigate(FRONTEND_ROUTES.SERVICES)}
               >
+
                 Book Appointment
               </motion.button>
             </div>

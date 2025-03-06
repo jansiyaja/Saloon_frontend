@@ -2,17 +2,22 @@ import { SlideData } from "../interfaces/Pages";
 
  export const slides: SlideData[] = [
   {
-    image: 'https://saloonsite.s3.eu-north-1.amazonaws.com/WhatsApp+Image+2025-02-21+at+12.55.01_9d6686e8.jpg',
+    image: 'https://saloonsite.s3.eu-north-1.amazonaws.com/Slider/IMG-20250305-WA0001.jpg',
     title: 'Experience Luxury',
     description: 'Step into a world of elegance and style.'
   },
   {
-    image: 'https://saloonsite.s3.eu-north-1.amazonaws.com/WhatsApp+Image+2025-02-21+at+12.55.12_3c3c2704.jpg',
+    image: 'https://saloonsite.s3.eu-north-1.amazonaws.com/man-getting-his-beard-shaved-with-razor.jpg',
     title: 'Top-Tier Services',
     description: 'From haircuts to spa treatments, we’ve got you covered.'
   },
   {
-    image: 'https://saloonsite.s3.eu-north-1.amazonaws.com/WhatsApp+Image+2025-02-21+at+12.55.25_0bbe0efb.jpg',
+    image: 'https://saloonsite.s3.eu-north-1.amazonaws.com/Slider/IMG-20250305-WA0003.jpg',
+    title: 'Redefine Your Style',
+    description: 'Our stylists are ready to transform your look.'
+  },
+  {
+    image: 'https://saloonsite.s3.eu-north-1.amazonaws.com/Slider/IMG-20250305-WA0004.jpg',
     title: 'Redefine Your Style',
     description: 'Our stylists are ready to transform your look.'
   }
@@ -39,6 +44,7 @@ import { SlideData } from "../interfaces/Pages";
     description: 'Pamper yourself with our nail care and polish services.',
     image: 'https://saloonsite.s3.eu-north-1.amazonaws.com/nail-hygiene-care-nail-polish.jpg',
   },
+
 ];
 
  export const testimonials = [
