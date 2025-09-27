@@ -1,145 +1,117 @@
+import { useState } from "react";
+import { useForm } from "react-hook-form";
+import { yupResolver } from "@hookform/resolvers/yup";
+import * as yup from "yup";
+import { GoogleLogin, CredentialResponse } from "@react-oauth/google";
 
-import { useForm } from 'react-hook-form';
-import { yupResolver } from '@hookform/resolvers/yup';
-import * as yup from 'yup';
-import { GoogleLogin } from '@react-oauth/google';
-import { CredentialResponse } from "@react-oauth/google";
-import { LoginFormData } from '../../interfaces/form';
-import { Link } from 'react-router-dom';
-import FRONTEND_ROUTES from '../../Routes/frontendRoutes';
+interface LoginFormData {
+  email: string;
+  password: string;
+}
 
 const schema = yup.object().shape({
-
-  email: yup.string().email('Invalid email format').required('Email is required'),
+  email: yup.string().email("Invalid email").required("Email is required"),
   password: yup
     .string()
-    .required('Password is required')
-    .min(8, 'Password must be at least 8 characters')
+    .required("Password is required")
+    .min(8, "Minimum 8 characters")
     .matches(
-      /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]/,
-      'Password must contain uppercase, lowercase, number and special character'
+      /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])/,
+      "Must contain uppercase, lowercase, number & special character"
     ),
-
 });
 
-const Login = () => {
+export default function SalonAdminLogin({ onLogin }: { onLogin?: (data: LoginFormData) => void }) {
   const {
     register,
     handleSubmit,
-    formState: { errors }
-  } = useForm({
-    resolver: yupResolver(schema)
-  });
+    formState: { errors },
+  } = useForm<LoginFormData>({ resolver: yupResolver(schema) });
 
-  const onSubmit = (data: LoginFormData) => {
-    console.log(data);
+  const [showPassword, setShowPassword] = useState(false);
+  const [loading, setLoading] = useState(false);
 
+  const onSubmit = async (data: LoginFormData) => {
+    setLoading(true);
+    await new Promise((r) => setTimeout(r, 1000));
+    setLoading(false);
+    onLogin?.(data);
   };
 
-  const handleGoogleSuccess = (credentialResponse: CredentialResponse) => {
-    console.log('Google Auth Success:', credentialResponse);
-
-  };
-
-  const handleGoogleError = () => {
-    console.error('Google Login Failed');
-
-  };
+  const handleGoogleSuccess = (res: CredentialResponse) => console.log("Google Auth:", res);
+  const handleGoogleError = () => console.error("Google Login Failed");
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-black py-12 px-4 sm:px-6 lg:px-8">
-      <div className="max-w-md w-full space-y-8 border-2 bg-black p-6 rounded-lg shadow-xl border-amber-400">
-        <div className="text-center">
-
-          <p className=" text-sm text-gray-300">
-            Join our premium salon experience
-          </p>
+    <div className="min-h-screen bg-black flex items-center justify-center px-4">
+      <div className="w-full max-w-md bg-black/80 border border-yellow-600/40 rounded-2xl p-8 shadow-lg">
+        {/* Branding */}
+        <div className="text-center mb-8">
+          <h1 className="text-4xl font-bold text-yellow-400 font-serif">Elite Salon</h1>
+          <p className="text-yellow-200/70 text-sm">Admin Dashboard</p>
         </div>
 
-        <div className="mt-5" >
-          <div className="flex justify-center">
-            <GoogleLogin
-              onSuccess={handleGoogleSuccess}
-              onError={handleGoogleError}
-              size="large"
-              width="250"
+        {/* Google Login */}
+     
+
+        {/* Form */}
+        <form className="space-y-5" onSubmit={handleSubmit(onSubmit)}>
+          <div>
+            <input
+              type="email"
+              {...register("email")}
+              placeholder="Email address"
+              className="w-full px-4 py-3 rounded-lg bg-black/50 border border-yellow-600/30 text-yellow-100 placeholder-yellow-500/50 focus:outline-none focus:ring-2 focus:ring-yellow-500"
             />
+            {errors.email && <p className="text-red-400 text-xs mt-1">{errors.email.message}</p>}
           </div>
 
-          <div className="mt-6 relative">
-            <div className="absolute inset-0 flex items-center">
-              <div className="w-full border-t border-gray-600"></div>
-            </div>
-            <div className="relative flex justify-center text-sm">
-              <span className="px-2 bg-gray-900 text-gray-300">Or Sign In with email</span>
-            </div>
+          <div className="relative">
+            <input
+              type={showPassword ? "text" : "password"}
+              {...register("password")}
+              placeholder="Password"
+              className="w-full px-4 py-3 rounded-lg bg-black/50 border border-yellow-600/30 text-yellow-100 placeholder-yellow-500/50 focus:outline-none focus:ring-2 focus:ring-yellow-500"
+            />
+            <button
+              type="button"
+              onClick={() => setShowPassword(!showPassword)}
+              className="absolute right-3 top-1/2 -translate-y-1/2 text-yellow-400 text-sm"
+            >
+              {showPassword ? "🙈" : "👁️"}
+            </button>
+            {errors.password && <p className="text-red-400 text-xs mt-1">{errors.password.message}</p>}
           </div>
 
-          <form className="mt-6 space-y-6" onSubmit={handleSubmit(onSubmit)}>
-
-
-            <div>
-              <label htmlFor="email" className="block text-sm font-medium text-gray-300">
-                Email Address
-              </label>
-              <input
-                id="email"
-                type="email"
-                {...register('email')}
-                className="mt-1 block w-full border border-amber-100  bg-gray-800 rounded-md shadow-sm py-2 px-3 text-gray-300 focus:ring-gold focus:border-gold"
-              />
-              {errors.email && (
-                <p className="mt-1 text-sm text-red-500">{errors.email.message}</p>
-              )}
-            </div>
-
-
-
-            <div>
-              <label htmlFor="password" className="block text-sm font-medium text-gray-300">
-                Password
-              </label>
-              <input
-                id="password"
-                type="password"
-                {...register('password')}
-                className="mt-1 block w-full border-gray-700 bg-gray-800 rounded-md shadow-sm py-2 px-3 text-gray-300 focus:ring-gold focus:border-gold"
-              />
-              <p className="mt-1 text-sm text-red-100">
-                <Link to={FRONTEND_ROUTES.FORGOT_PASSWORD} className="hover:underline">
-                  Forgot password?
-                </Link>
-              </p>
-
-              {errors.password && (
-                <p className="mt-1 text-sm text-red-500">{errors.password.message}</p>
-              )}
-            </div>
-
-
-            <div>
-              <button
-                type="submit"
-                className="w-full flex justify-center py-3 px-4 border border-amber-300 rounded-md shadow-sm text-sm font-medium bg-gold hover:bg-amber-300 text-amber-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gold focus:ring-offset-amber-400 transition duration-150"
-              >
-                Login
-              </button>
-            </div>
-          </form>
+          <button
+            type="submit"
+            disabled={loading}
+            className="w-full bg-gradient-to-r from-yellow-600 to-yellow-700 py-3 rounded-lg text-yellow-100 font-semibold hover:from-yellow-500 hover:to-yellow-600 transition disabled:opacity-50"
+          >
+            {loading ? "Signing in..." : "Sign In"}
+          </button>
+        </form>
+         
+        <div className="relative mb-6">
+          <div className="absolute inset-0 flex items-center">
+            <div className="w-full border-t border-yellow-600/30" />
+          </div>
+          <div className="relative flex justify-center text-xs">
+            <span className="px-2 bg-black text-yellow-400/70">Or sign in with email</span>
+          </div>
         </div>
 
-        <div className="mt-6 text-center">
-          <p className="text-sm text-gray-400">
-            Don't have an account?{' '}
-            <Link to={FRONTEND_ROUTES.REGISTER} className="font-medium text-gold hover:text-yellow-400">
-              Register Now
-            </Link>
-          </p>
+          <div className="flex justify-center mb-6">
+          <GoogleLogin onSuccess={handleGoogleSuccess} onError={handleGoogleError} size="large" />
         </div>
 
+        {/* Footer */}
+        <p className="text-center text-yellow-200/60 text-sm mt-6">
+          Don’t have an account?{" "}
+          <a href="#" className="text-yellow-400 hover:text-yellow-300">
+            Request Access
+          </a>
+        </p>
       </div>
     </div>
   );
-};
-
-export default Login;
+}

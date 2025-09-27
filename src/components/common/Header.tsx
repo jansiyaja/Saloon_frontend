@@ -13,6 +13,7 @@ const Header: React.FC = () => {
     { path: FRONTEND_ROUTES.SERVICES, label: "Services" },
     { path: FRONTEND_ROUTES.ABOUT, label: "About" },
     { path: FRONTEND_ROUTES.CONTACT, label: "Contact" },
+    { path: FRONTEND_ROUTES.CONTACT, label: "" },
   ];
 
   return (
@@ -20,7 +21,7 @@ const Header: React.FC = () => {
       <div className="container mx-auto px-4 py-3 flex justify-between items-center">
         {/* Logo */}
         <Link to={FRONTEND_ROUTES.HOME} className="flex items-center space-x-2 font-medium text-amber-300">
-          <img src={Logo} alt="Logo" className="h-10 w-auto object-contain" />
+          <img src={Logo} alt="Logo" className="h-20 w-auto object-contain" />
         </Link>
 
         {/* Desktop Navigation */}
