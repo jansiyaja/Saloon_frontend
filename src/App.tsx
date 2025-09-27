@@ -18,15 +18,15 @@ const App = () => {
         <Route path={FRONTEND_ROUTES.SERVICES} element={<Services />} /> 
         <Route path={FRONTEND_ROUTES.ABOUT} element={<About />} /> 
         <Route path={FRONTEND_ROUTES.CONTACT} element={<Contact />} /> 
-        
-      <Route path={FRONTEND_ROUTES.REGISTER} element={<Register />} /> 
-      <Route path={FRONTEND_ROUTES.LOGIN} element={<Login />} /> 
-      <Route path={FRONTEND_ROUTES.FORGOT_PASSWORD} element={<ForgotPassword />} /> 
+       
 
       </Route>
      
 
-
+ 
+      <Route path={FRONTEND_ROUTES.REGISTER} element={<Register />} /> 
+      <Route path={FRONTEND_ROUTES.LOGIN} element={<Login />} /> 
+      <Route path={FRONTEND_ROUTES.FORGOT_PASSWORD} element={<ForgotPassword />} /> 
     </Routes>
   );
 };
