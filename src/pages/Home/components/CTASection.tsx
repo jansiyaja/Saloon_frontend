@@ -49,7 +49,7 @@ const CTASection: React.FC = () => {
 
         {/* CTA Button */}
         <Link
-          to={FRONTEND_ROUTES.APPOINTMENT}
+          to={FRONTEND_ROUTES.REGISTER}
           className="inline-block px-6 sm:px-8 py-3 sm:py-4 bg-amber-400 text-black font-bold rounded-lg shadow-md hover:bg-amber-500 hover:scale-105 transition-transform duration-300"
         >
           MAKE AN APPOINTMENT
